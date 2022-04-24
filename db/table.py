@@ -34,7 +34,7 @@ class Table(object):
             foreign_keys = self._cur
 
         # build columns from the foreign keys metadata we have
-        for (column_name, foreign_table_schema, foreign_table, foreign_column) in foreign_keys:
+        for (column_name, foreign_table_schema, foreign_table, foreign_column, table_name) in foreign_keys:
             col = getattr(self, column_name)
             foreign_key = Column(con, query_templates, foreign_table_schema, foreign_table, foreign_column, col.type, self.keys_per_column)
             self.foreign_keys.append(foreign_key)
@@ -51,7 +51,7 @@ class Table(object):
             ref_keys = self._cur
 
         # build columns for the ref key metadata we have
-        for (column_name, ref_schema, ref_table, ref_column) in ref_keys:
+        for (column_name, ref_schema, ref_table, ref_column, table_name) in ref_keys:
             col = getattr(self, column_name)
             ref_key = Column(con, query_templates, ref_schema, ref_table, ref_column, col.type, self.keys_per_column)
             self.ref_keys.append(ref_key)

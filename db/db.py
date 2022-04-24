@@ -834,13 +834,13 @@ class DB(object):
             table_db_foreign_keys = defaultdict(list)
             for rel in self.cur:
                 # second value in relationship tuple is the table name
-                table_db_foreign_keys[rel[1]].append(rel)
+                table_db_foreign_keys[rel[4]].append(rel)
 
             self.cur.execute(self._query_templates['system']['ref_keys_for_db'])
             table_db_ref_keys = defaultdict(list)
             for rel in self.cur:
                 # second value in relationship tuple is the table name
-                table_db_ref_keys[rel[1]].append(rel)
+                table_db_ref_keys[rel[4]].append(rel)
 
             # generate our Tables, and load them into a TableSet
             self._tables = TableSet([Table(self.con, self._query_templates, tables[t][0].schema, t, tables[t],
